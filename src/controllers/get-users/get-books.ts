@@ -15,6 +15,7 @@ export class GetBooksController implements IGetBooksController {
         body: books,
       };
     } catch (e) {
+      console.log(e);
       return {
         statusCode: 500,
         body: "Não foi possível retornar a lista de livros",
