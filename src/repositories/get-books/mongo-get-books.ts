@@ -2,7 +2,7 @@ import { IGetBooksRespository } from "../../controllers/get-users/protocols";
 import { MongoClient } from "../../database/mongo";
 import { Book } from "../../models/Book";
 
-export class MongoGetBooksRespository implements IGetBooksRespository {
+export class MongoGetBooks implements IGetBooksRespository {
   async getBooks(): Promise<Book[]> {
     const books = await MongoClient.db
       .collection<Omit<Book, "id">>("books")

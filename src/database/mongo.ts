@@ -11,6 +11,5 @@ export const MongoClient = {
     const db = client.db("books-db");
     this.client = client;
     this.db = db;
-    console.log(client);
   },
 };

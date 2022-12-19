@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import { GetBooksController } from "./controllers/get-users/get-books";
-import { MongoGetBooksRespository } from "./repositories/get-books/mongo-get-books";
+import { MongoGetBooks } from "./repositories/get-books/mongo-get-books";
 import { MongoClient } from "./database/mongo";
 
 const main = async () => {
@@ -13,7 +13,7 @@ const main = async () => {
   const port = process.env.PORT || 5000;
 
   app.get("/books", async (req, res) => {
-    const mongoGetBooksRespository = new MongoGetBooksRespository();
+    const mongoGetBooksRespository = new MongoGetBooks();
     const getBookController = new GetBooksController(mongoGetBooksRespository);
 
     const response = await getBookController.handle();
