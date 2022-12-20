@@ -13,7 +13,6 @@ export class GetBooksController implements IController {
 
       return ok<Book[]>(books);
     } catch (e) {
-      console.log(e);
       return serverError();
     }
   }
