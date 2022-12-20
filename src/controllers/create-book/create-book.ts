@@ -1,12 +1,8 @@
 import { Book } from "../../models/Book";
-import { HttpRequest, HttpResponse } from "../protocols";
-import {
-  CreateBookParams,
-  ICreateBookController,
-  ICreateBookRepository,
-} from "./protocols";
+import { HttpRequest, HttpResponse, IController } from "../protocols";
+import { CreateBookParams, ICreateBookRepository } from "./protocols";
 
-export class CreateBookController implements ICreateBookController {
+export class CreateBookController implements IController {
   constructor(private readonly createBookRepository: ICreateBookRepository) {}
   async handle(
     httpRequest: HttpRequest<CreateBookParams>

@@ -1,8 +1,8 @@
-import { IGetBooksController, IGetBooksRespository } from "./protocols";
+import { IGetBooksRespository } from "./protocols";
 import { HttpResponse } from "../protocols";
 import { Book } from "../../models/Book";
 
-export class GetBooksController implements IGetBooksController {
+export class GetBooksController implements IController {
   constructor(private readonly IGetBooksRepository: IGetBooksRespository) {}
   async handle(): Promise<HttpResponse<Book[] | string>> {
     try {

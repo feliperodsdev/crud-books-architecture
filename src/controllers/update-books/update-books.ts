@@ -1,27 +1,22 @@
 import { Book } from "../../models/Book";
-import { HttpRequest, HttpResponse } from "../protocols";
-import {
-  IUpdateBooksController,
-  IUpdateBooksRepository,
-  UpdateBooksParams,
-} from "./protocols";
+import { HttpRequest, HttpResponse, IController } from "../protocols";
+import { IUpdateBooksRepository, UpdateBooksParams } from "./protocols";
 
-export class UpdateBooksController implements IUpdateBooksController {
+export class UpdateBooksController implements IController {
   constructor(
     private readonly IUpdateBooksRepository: IUpdateBooksRepository
   ) {}
   async handle(
-    id: string,
-    httpRequest: HttpRequest<any>
+    httpRequest: HttpRequest<UpdateBooksParams>
   ): Promise<HttpResponse<Book | string>> {
     try {
       const id = httpRequest?.params?.id;
       const body = httpRequest?.body;
 
-      if (!id) {
+      if (!id || !body) {
         return {
           statusCode: 400,
-          body: "Id não enviado",
+          body: "Id ou body não enviado",
         };
       }
 
