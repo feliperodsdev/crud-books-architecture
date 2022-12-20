@@ -1,4 +1,5 @@
 import { Book } from "../../models/Book";
+import { badRequest, ok, serverError } from "../helpers";
 import { HttpRequest, HttpResponse, IController } from "../protocols";
 import { IUpdateBooksRepository, UpdateBooksParams } from "./protocols";
 
@@ -14,10 +15,7 @@ export class UpdateBooksController implements IController {
       const body = httpRequest?.body;
 
       if (!id || !body) {
-        return {
-          statusCode: 400,
-          body: "Id ou body não enviado",
-        };
+        return badRequest("ID ou Body não enviados");
       }
 
       const allowedFields: (keyof UpdateBooksParams)[] = [
@@ -31,10 +29,7 @@ export class UpdateBooksController implements IController {
       );
 
       if (someNotAllowedFields) {
-        return {
-          statusCode: 400,
-          body: "Alguns campos não podem ser atualizados",
-        };
+        return badRequest("Alguns campos não podem ser atualizados");
       }
 
       const bookUpdate = await this.IUpdateBooksRepository.updateBooks(
@@ -42,15 +37,9 @@ export class UpdateBooksController implements IController {
         body
       );
 
-      return {
-        statusCode: 200,
-        body: bookUpdate,
-      };
+      return ok(bookUpdate);
     } catch (e) {
-      return {
-        statusCode: 500,
-        body: "Algo deu errado",
-      };
+      return serverError();
     }
   }
 }

@@ -1,6 +1,7 @@
 import { IGetBooksRespository } from "./protocols";
-import { HttpResponse } from "../protocols";
+import { HttpResponse, IController } from "../protocols";
 import { Book } from "../../models/Book";
+import { ok, serverError } from "../helpers";
 
 export class GetBooksController implements IController {
   constructor(private readonly IGetBooksRepository: IGetBooksRespository) {}
@@ -10,16 +11,10 @@ export class GetBooksController implements IController {
       //direcionar para banco de dados
       const books = await this.IGetBooksRepository.getBooks();
 
-      return {
-        statusCode: 500,
-        body: books,
-      };
+      return ok(books);
     } catch (e) {
       console.log(e);
-      return {
-        statusCode: 500,
-        body: "Não foi possível retornar a lista de livros",
-      };
+      return serverError();
     }
   }
 }
