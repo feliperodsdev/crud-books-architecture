@@ -11,7 +11,7 @@ export class GetBooksController implements IController {
       //direcionar para banco de dados
       const books = await this.IGetBooksRepository.getBooks();
 
-      return ok(books);
+      return ok<Book[]>(books);
     } catch (e) {
       console.log(e);
       return serverError();

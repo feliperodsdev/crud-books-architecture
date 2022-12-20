@@ -37,7 +37,7 @@ export class UpdateBooksController implements IController {
         body
       );
 
-      return ok(bookUpdate);
+      return ok<Book>(bookUpdate);
     } catch (e) {
       return serverError();
     }

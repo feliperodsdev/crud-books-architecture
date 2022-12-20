@@ -23,7 +23,7 @@ export class CreateBookController implements IController {
 
       const book = await this.createBookRepository.createBook(httpRequest.body);
 
-      return created(book);
+      return created<Book>(book);
     } catch (e) {
       return serverError();
     }
